@@ -24,6 +24,10 @@ module Panda
       )
     end
 
+    def advertiser_info(ids, params = {})
+      get_collection('advertiser/info/', params.merge(advertiser_ids: ids))
+    end
+
     # returns a list of campaigngs for an advertizer
     def campaigns(advertizer_id, params = {})
       get_collection('campaign/get/', params.merge(advertiser_id: advertizer_id))
