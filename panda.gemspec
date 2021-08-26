@@ -24,5 +24,5 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n").reject { |f| ignored.match(f) }
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'faraday', '~> 1.7'
+  s.add_runtime_dependency 'faraday', '~> 1.0'
 end
