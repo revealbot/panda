@@ -4,3 +4,7 @@ AllCops:
   TargetRubyVersion: 2.7
   NewCops: disable
   SuggestExtensions: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
