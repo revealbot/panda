@@ -3,9 +3,9 @@
 module Panda
   class APIError < StandardError
     attr_reader :body,
-      :http_status,
-      :code,
-      :message
+                :http_status,
+                :code,
+                :message
 
     def initialize(http_status, body)
       @http_status = http_status

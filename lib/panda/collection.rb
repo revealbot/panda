@@ -7,20 +7,22 @@ module Panda
 
     # current page
     attr_reader :page,
-      :page_size,
-      :total_number,
-      :total_page
+                :page_size,
+                :total_number,
+                :total_page
 
     def initialize(response, client)
       @response = response
       @client = client
 
-      @page = response.parsed_body.dig('data', 'page_info', 'page')
-      @page_size = response.parsed_body.dig('data', 'page_info', 'page_size')
-      @total_number = response.parsed_body.dig('data', 'page_info', 'total_number')
-      @total_page = response.parsed_body.dig('data', 'page_info', 'total_page')
+      data = response.parsed_body.fetch('data', {})
+      @page = data.dig('page_info', 'page')
+      @page_size = data.dig('page_info', 'page_size')
+      @total_number = data.dig('page_info', 'total_number')
+      @total_page = data.dig('page_info', 'total_page')
 
-      super response.parsed_body.dig('data', 'list')
+      # some API return result list in data field instead of list field
+      super(data.has?('list') ? data['list'] : data)
     end
   end
 end

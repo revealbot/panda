@@ -7,7 +7,7 @@ require 'panda/version'
 Gem::Specification.new do |s|
   s.name = 'panda-tiktok'
   s.version = Panda::VERSION
-  s.required_ruby_version = ">= 2.3.0"
+  s.required_ruby_version = '>= 2.7.0'
   s.summary = 'Ruby client for TikTok Marketing API'
   s.author = 'Revealbot'
   s.email = 'dev@revealbot.com'

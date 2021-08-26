@@ -20,7 +20,7 @@ module Panda
         'oauth2/advertiser/get/',
         access_token: access_token,
         app_id: Panda.config.app_id,
-        secret: Panda.config.app_secret,
+        secret: Panda.config.app_secret
       )
     end
 
@@ -43,8 +43,8 @@ module Panda
         params.merge(
           advertiser_id: advertiser_id,
           report_type: report_type,
-          dimensions: dimensions,
-        ),
+          dimensions: dimensions
+        )
       )
     end
 
@@ -55,7 +55,7 @@ module Panda
       response = Faraday.get(url.to_s, params, 'Access-Token' => access_token)
       Panda::Collection.new(
         Panda::Response.new(response.status, response.headers, response.body),
-        self,
+        self
       )
     end
   end
