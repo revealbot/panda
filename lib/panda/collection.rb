@@ -14,10 +14,10 @@ module Panda
     def initialize(response, client)
       @response = response
       @client = client
-      @page = response.parsed_body['page']
-      @page_size = response.parsed_body['page_size']
-      @total_number = response.parsed_body['total_number']
-      @total_page = response.parsed_body['total_page']
+      @page = response.parsed_body.dig('page_info', 'page')
+      @page_size = response.parsed_body.dig('page_info', 'page_size')
+      @total_number = response.parsed_body.dig('page_info', 'total_number')
+      @total_page = response.parsed_body.dig('page_info', 'total_page')
 
       super response.parsed_body.dig('data', 'list')
     end
