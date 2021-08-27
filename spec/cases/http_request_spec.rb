@@ -30,4 +30,16 @@ describe Panda::HTTPRequest do
       }
     )
   end
+
+  it 'adds additional headers' do
+    request = described_class.new('GET', 'oauth2/advertiser/get', {}, { 'Access-Token' => 'sometoken' })
+
+    expect(request.headers).to eq(
+      {
+        'Access-Token' => 'sometoken',
+        'Accept' => 'application/json',
+        'User-Agent' => "ruby-panda-tiktok/#{Panda::VERSION}"
+      }
+    )
+  end
 end

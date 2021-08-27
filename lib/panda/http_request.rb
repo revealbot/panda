@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'panda/version'
+
 module Panda
   class HTTPRequest
     attr_reader :raw_method, :raw_path, :raw_params, :raw_headers
@@ -33,7 +35,7 @@ module Panda
     def headers
       raw_headers.merge(
         'Accept' => 'application/json',
-        'User-Agent' => "http-panda-tiktok/#{Panda::VERSION}"
+        'User-Agent' => "ruby-panda-tiktok/#{Panda::VERSION}"
       )
     end
 
