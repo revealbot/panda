@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Panda::Collection do
-  let(:response) { Panda::Response.new(200, {}, list_response_body) }
+  let(:response) { Panda::HTTPResponse.new(200, {}, list_response_body) }
 
   context 'response with result list field in data field' do
     let(:list_response_body) do

@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   TargetRubyVersion: 2.7
   NewCops: disable
@@ -8,3 +6,10 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+
+# enable it later
+Style/Documentation:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false

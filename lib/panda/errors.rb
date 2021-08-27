@@ -5,7 +5,8 @@ module Panda
     attr_reader :body,
                 :http_status,
                 :code,
-                :message
+                :message,
+                :request_id
 
     def initialize(http_status, body)
       @http_status = http_status
@@ -17,7 +18,7 @@ module Panda
     private
 
     def parse_error
-      return unless body.present?
+      return if body.empty?
 
       parsed_body = begin
         JSON.parse(body)
@@ -26,8 +27,9 @@ module Panda
       end
       @code = parsed_body.fetch('code', http_status)
       @message = parsed_body.fetch('message', body)
+      @request_id = parsed_body.fetch('request_id')
 
-      "#{@code}: #{message}"
+      "Request #{@request_id}; #{@code}: #{message}"
     end
   end
 end

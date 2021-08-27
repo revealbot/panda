@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require 'faraday'
-
 require 'panda/collection'
 require 'panda/errors'
-require 'panda/response'
+require 'panda/http_request'
+require 'panda/http_response'
 
 module Panda
   class Client
@@ -53,14 +52,8 @@ module Panda
     end
 
     def get_collection(path, params = {})
-      url = URI.parse(Panda.config.api_base_url)
-      url.path = "/open_api/#{Panda.config.api_version}/#{path}"
-
-      response = Faraday.get(url.to_s, params, 'Access-Token' => access_token)
-      Panda::Collection.new(
-        Panda::Response.new(response.status, response.headers, response.body),
-        self
-      )
+      request = Panda::HTTPRequest.new('GET', path, params, 'Access-Token' => access_token)
+      Panda::Collection.new(Panda.make_get_request(request), self)
     end
   end
 end

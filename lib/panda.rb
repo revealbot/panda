@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'faraday'
 
 require 'panda/client'
 require 'panda/configuration'
@@ -15,6 +16,11 @@ module Panda
 
     def config
       @config ||= Panda::Configuration.new
+    end
+
+    def make_get_request(request)
+      response = Faraday.get(request.url, request.params, request.headers)
+      Panda::HTTPResponse.new(response.status, response.headers, response.body)
     end
   end
 end
