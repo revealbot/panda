@@ -34,7 +34,7 @@ describe Panda::Client do
     let(:fields) { %w[id name status timezone currency].sample(3) }
 
     it 'calls #get_collection' do
-      expect(subject).to receive(:get_collection).with('advertiser/info/', advertiser_ids: ids, fields: fields)
+      expect(subject).to receive(:get_collection).with('advertiser/info/', { advertiser_ids: ids, fields: fields })
 
       subject.advertiser_info(ids, fields: fields)
     end
