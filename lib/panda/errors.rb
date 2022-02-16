@@ -27,7 +27,7 @@ module Panda
       end
       @code = parsed_body.fetch('code', http_status)
       @message = parsed_body.fetch('message', body)
-      @request_id = parsed_body.fetch('request_id')
+      @request_id = parsed_body.fetch('request_id', 'unknown')
 
       "Request #{@request_id}; #{@code}: #{message}"
     end
