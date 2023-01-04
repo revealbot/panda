@@ -42,7 +42,7 @@ module Panda
 
     def report(advertiser_id, report_type, dimensions, params = {})
       get_collection(
-        'reports/integrated/get/',
+        'report/integrated/get/',
         params.merge(
           advertiser_id: advertiser_id,
           report_type: report_type,
