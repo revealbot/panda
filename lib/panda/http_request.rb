@@ -25,7 +25,7 @@ module Panda
 
     # TikTok accepts arrays in GET request only as json strings
     def params
-      return raw_params unless get_request? && raw_params.is_a?(Hash)
+      return raw_params unless get? && raw_params.is_a?(Hash)
 
       raw_params.inject({}) do |hash, (key, value)|
         hash.merge(key => value.is_a?(Array) ? value.to_json : value)
@@ -41,10 +41,8 @@ module Panda
 
     private
 
-    # rubocop:disable Naming/AccessorMethodName
-    def get_request?
+    def get?
       method == 'GET'
     end
-    # rubocop:enable Naming/AccessorMethodName
   end
 end
