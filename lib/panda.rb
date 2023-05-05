@@ -20,9 +20,9 @@ module Panda
 
     def make_get_request(request)
       connection = Faraday.new do |conn|
+        conn.use      FaradayMiddleware::PandaErrorHandler
         conn.request  :json
         conn.response :json
-        conn.use      FaradayMiddleware::PandaErrorHandler
       end
 
       response = connection.get(request.url, request.params, request.headers)

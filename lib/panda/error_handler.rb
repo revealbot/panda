@@ -12,7 +12,7 @@ module FaradayMiddleware
     private
 
     def check_and_raise!(status, body)
-      case code_from_body(body)
+      case body['code']
       when 40001
         raise ::Panda::NoPermissionsError.new(status, body)
       when 40105
@@ -22,10 +22,6 @@ module FaradayMiddleware
       when 40000..60000
         raise ::Panda::APIError.new(status, body)
       end
-    end
-
-    def code_from_body(body)
-      JSON.parse(body)['code']
     end
   end
 end

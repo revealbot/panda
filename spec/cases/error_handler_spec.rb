@@ -4,14 +4,12 @@ require 'spec_helper'
 
 describe FaradayMiddleware::PandaErrorHandler do
   let(:body) do
-    <<-JSON
     {
-      "message": "OK",
-      "code": 0,
-      "data": {},
-      "response_id": "2023050409181201018904922342087A16"
+      'message' => 'OK',
+      'code' => 0,
+      'data' => {},
+      'response_id' => '2023050409181201018904922342087A16'
     }
-    JSON
   end
   let(:status) { 200 }
   let(:env) do
@@ -27,13 +25,11 @@ describe FaradayMiddleware::PandaErrorHandler do
 
   context 'when response raise error' do
     let(:body) do
-      <<-JSON
       {
-        "message": "ERROR",
-        "code": #{code},
-        "response_id": "2020031009181201018904922342087A16"
+        'message' => 'ERROR',
+        'code' => code,
+        'response_id' => '2020031009181201018904922342087A16'
       }
-      JSON
     end
 
     context 'when response raises NotAuthorizedError' do

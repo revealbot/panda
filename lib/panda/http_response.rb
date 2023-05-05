@@ -7,7 +7,7 @@ module Panda
     def initialize(status, headers, body)
       @status = status
       @headers = headers
-      @parsed_body = JSON.parse(body)
+      @parsed_body = body
       @request_id = parsed_body['request_id']
     end
   end
