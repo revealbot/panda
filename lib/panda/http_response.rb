@@ -16,14 +16,9 @@ module Panda
     private
 
     def parse(body)
-      # check that status is 200
-      raise Panda::APIError.new(status, body) if status != 200
-
       @parsed_body = JSON.parse(body)
       @request_id = parsed_body['request_id']
       return if parsed_body['code'] == SUCCESS_CODE
-
-      raise Panda::APIError.new(status, body)
     end
   end
 end

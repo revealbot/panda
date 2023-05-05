@@ -23,18 +23,4 @@ describe Panda::HTTPResponse do
       }
     )
   end
-
-  it 'raises error in case of error API response' do
-    expect do
-      described_class.new(200, {}, {
-        message: 'PERMISSION_ERROR',
-        code: 40002,
-        request_id: request_id
-      }.to_json)
-    end.to raise_error(
-      an_instance_of(Panda::APIError).and(
-        having_attributes(code: 40002, message: 'PERMISSION_ERROR', request_id: request_id)
-      )
-    )
-  end
 end

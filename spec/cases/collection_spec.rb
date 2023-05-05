@@ -48,7 +48,7 @@ describe Panda::Collection do
     end
   end
 
-  context 'reponse with result list inside data field' do
+  context 'response with result list inside data field' do
     let(:list_response_body) do
       <<-JSON
       {

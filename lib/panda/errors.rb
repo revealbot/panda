@@ -32,4 +32,10 @@ module Panda
       "Request #{@request_id}; #{@code}: #{message}"
     end
   end
+
+  class NoPermissionsError < APIError; end
+
+  class NotAuthorizedError < APIError; end
+
+  class TooManyRequestsError < APIError; end
 end
