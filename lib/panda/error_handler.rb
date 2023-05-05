@@ -4,7 +4,7 @@ require 'faraday'
 module FaradayMiddleware
   class PandaErrorHandler < Faraday::Middleware
     def on_complete(env)
-      raise Panda::APIError.new(env.status, env.body) if env[:status] != 200
+      raise Panda::APIError.new(env.status, env.body) unless env.success?
 
       check_and_raise!(env.status, env.body)
     end
