@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FaradayMiddleware::PandaErrorHandler do
+describe Panda::ErrorMiddleware do
   let(:body) do
     {
       'message' => 'OK',

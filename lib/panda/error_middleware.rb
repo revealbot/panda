@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'faraday'
-module FaradayMiddleware
-  class PandaErrorHandler < Faraday::Middleware
+module Panda
+  class ErrorMiddleware < Faraday::Middleware
     def on_complete(env)
       raise Panda::APIError.new(env.status, env.body) unless env.success?
 
