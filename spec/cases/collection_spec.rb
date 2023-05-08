@@ -7,31 +7,29 @@ describe Panda::Collection do
 
   context 'response with result list field in data field' do
     let(:list_response_body) do
-      <<-JSON
       {
-        "message": "OK",
-        "code": 0,
-        "data": {
-          "list": [
+        'message' => 'OK',
+        'code' => 0,
+        'data' => {
+          'list' => [
             {
-              "id": "test_id_1",
-              "name": "test_name_1"
+              'id' => 'test_id_1',
+              'name' => 'test_name_1'
             },
             {
-              "id": "test_id_2",
-              "name": "test_name_2"
+              'id' => 'test_id_2',
+              'name' => 'test_name_2'
             }
           ],
-          "page_info": {
-            "page": 1,
-            "page_size": 2,
-            "total_number": 10,
-            "total_page": 5
+          'page_info' => {
+            'page' => 1,
+            'page_size' => 2,
+            'total_number' => 10,
+            'total_page' => 5
           }
         },
-        "response_id": "2020031009181201018904922342087A16"
+        'response_id': '2020031009181201018904922342087A16'
       }
-      JSON
     end
 
     it 'gets result list' do
@@ -48,25 +46,23 @@ describe Panda::Collection do
     end
   end
 
-  context 'reponse with result list inside data field' do
+  context 'response with result list inside data field' do
     let(:list_response_body) do
-      <<-JSON
       {
-        "message": "OK",
-        "code": 0,
-        "data": [
+        'message' => 'OK',
+        'code' => 0,
+        'data' => [
           {
-            "id": "test_id_1",
-            "name": "test_name_1"
+            'id' => 'test_id_1',
+            'name' => 'test_name_1'
           },
           {
-            "id": "test_id_2",
-            "name": "test_name_2"
+            'id' => 'test_id_2',
+            'name' => 'test_name_2'
           }
         ],
-        "response_id": "2020031009181201018904922342087A16"
+        'response_id': '2020031009181201018904922342087A16'
       }
-      JSON
     end
 
     it 'gets result list' do

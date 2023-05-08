@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'panda/collection'
+require 'panda/error_middleware'
 require 'panda/errors'
 require 'panda/http_request'
 require 'panda/http_response'
