@@ -19,11 +19,11 @@ describe Panda::ErrorMiddleware do
     e
   end
 
-  it 'when response hasn\'t error' do
+  it 'when response is not an error' do
     expect { described_class.new.on_complete(env) }.not_to raise_error
   end
 
-  context 'when response raise error' do
+  context 'when response raises error' do
     let(:body) do
       {
         'message' => 'ERROR',
