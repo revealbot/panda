@@ -39,9 +39,4 @@ describe Panda::Client do
       subject.advertiser_info(ids, fields: fields)
     end
   end
-
-  describe '#get_collection' do
-    it '' do
-    end
-  end
 end

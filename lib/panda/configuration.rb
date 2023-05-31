@@ -2,7 +2,7 @@
 
 module Panda
   class Configuration
-    API_BASE_URL = 'https://ads.tiktok.com/'
+    API_BASE_URL = 'https://business-api.tiktok.com/'
 
     attr_accessor :app_id,
                   :app_secret,
