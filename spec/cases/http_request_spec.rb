@@ -4,13 +4,13 @@ require 'spec_helper'
 
 describe Panda::HTTPRequest do
   before do
-    Panda.config.api_version = 'v1.2'
+    Panda.config.api_version = 'v1.3'
   end
 
   it 'adds api version to url' do
     request = described_class.new('GET', 'oauth2/advertiser/get/')
 
-    expect(request.url).to eq('https://ads.tiktok.com/open_api/v1.2/oauth2/advertiser/get/')
+    expect(request.url).to eq('https://business-api.tiktok.com/open_api/v1.3/oauth2/advertiser/get/')
   end
 
   it 'converts GET array params to JSON string' do
