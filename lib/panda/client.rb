@@ -52,6 +52,18 @@ module Panda
       )
     end
 
+    def token_info(app_id)
+      get_token('tt_user/token_info/get/', app_id: app_id, access_token: access_token)
+    end
+
+    private
+
+    def get_token(path, params = {})
+      request = Panda::HTTPRequest.new('GET', path, params)
+      response = Panda.make_get_request(request)
+      response.status == 200 ? response.parsed_body : nil
+    end
+
     def get_collection(path, params = {})
       request = Panda::HTTPRequest.new('GET', path, params, 'Access-Token' => access_token)
       Panda::Collection.new(Panda.make_get_request(request), self)
