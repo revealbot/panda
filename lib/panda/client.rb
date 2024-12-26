@@ -56,7 +56,7 @@ module Panda
       get_token(
         'tt_user/token_info/get/',
         app_id: Panda.config.app_id,
-        access_token: access_token,
+        access_token: access_token
       )
     end
 
