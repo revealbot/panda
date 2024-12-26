@@ -64,8 +64,7 @@ module Panda
 
     def get_token(path, params = {})
       request = Panda::HTTPRequest.new('GET', path, params)
-      response = Panda.make_get_request(request)
-      response.parsed_body.fetch('data', {})
+      Panda::Item.new(Panda.make_get_request(request))
     end
 
     def get_collection(path, params = {})
