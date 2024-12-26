@@ -41,12 +41,12 @@ describe Panda::Client do
   end
 
   describe '#token_info' do
-    let(:app_id) { SecureRandom.hex }
-
     it 'calls #get_token' do
-      expect(subject).to receive(:get_token).with('tt_user/token_info/get/', { app_id: app_id, access_token: token })
+      expect(subject)
+        .to receive(:get_token)
+        .with('tt_user/token_info/get/', { app_id: Panda.config.app_id, access_token: token })
 
-      subject.token_info(app_id)
+      subject.token_info
     end
   end
 end

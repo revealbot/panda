@@ -52,8 +52,12 @@ module Panda
       )
     end
 
-    def token_info(app_id)
-      get_token('tt_user/token_info/get/', app_id: app_id, access_token: access_token)
+    def token_info
+      get_token(
+        'tt_user/token_info/get/',
+        app_id: Panda.config.app_id,
+        access_token: access_token,
+      )
     end
 
     private
