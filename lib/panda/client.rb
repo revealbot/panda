@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'panda/collection'
+require 'panda/token_info'
 require 'panda/error_middleware'
 require 'panda/errors'
 require 'panda/http_request'
@@ -64,7 +65,7 @@ module Panda
 
     def get_token(path, params = {})
       request = Panda::HTTPRequest.new('GET', path, params)
-      Panda::Item.new(Panda.make_get_request(request))
+      Panda::TokenInfo.new(Panda.make_get_request(request))
     end
 
     def get_collection(path, params = {})
