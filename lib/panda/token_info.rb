@@ -9,7 +9,7 @@ module Panda
     end
 
     def [](key)
-      @data[key]
+      data[key]
     end
   end
 end
