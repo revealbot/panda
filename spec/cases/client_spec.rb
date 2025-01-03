@@ -39,4 +39,14 @@ describe Panda::Client do
       subject.advertiser_info(ids, fields: fields)
     end
   end
+
+  describe '#token_info' do
+    it 'calls #get_token' do
+      expect(subject)
+        .to receive(:get_token)
+        .with('tt_user/token_info/get/', { app_id: Panda.config.app_id, access_token: token })
+
+      subject.token_info
+    end
+  end
 end
