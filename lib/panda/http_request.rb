@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'panda/version'
+require 'uri'
 
 module Panda
   class HTTPRequest
@@ -11,10 +12,6 @@ module Panda
       @raw_path = path
       @raw_params = params
       @raw_headers = headers
-    end
-
-    def method
-      raw_method
     end
 
     def url
@@ -39,10 +36,14 @@ module Panda
       )
     end
 
+    def method
+      raw_method.downcase.to_sym
+    end
+
     private
 
     def get?
-      method == 'GET'
+      raw_method == 'GET'
     end
   end
 end

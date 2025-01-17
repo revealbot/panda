@@ -18,14 +18,14 @@ module Panda
       @config ||= Panda::Configuration.new
     end
 
-    def make_get_request(request)
+    def make_request(request)
       connection = Faraday.new do |conn|
         conn.use      Panda::ErrorMiddleware
         conn.request  :json
         conn.response :json
       end
 
-      response = connection.get(request.url, request.params, request.headers)
+      response = connection.run_request(request.method, request.url, request.params, request.headers)
       Panda::HTTPResponse.new(response.status, response.headers, response.body)
     end
   end

@@ -64,13 +64,13 @@ module Panda
     private
 
     def get_token(path, params = {})
-      request = Panda::HTTPRequest.new('GET', path, params)
-      Panda::TokenInfo.new(Panda.make_get_request(request))
+      request = Panda::HTTPRequest.new('POST', path, params)
+      Panda::TokenInfo.new(Panda.make_request(request))
     end
 
     def get_collection(path, params = {})
       request = Panda::HTTPRequest.new('GET', path, params, 'Access-Token' => access_token)
-      Panda::Collection.new(Panda.make_get_request(request), self)
+      Panda::Collection.new(Panda.make_request(request), self)
     end
   end
 end
