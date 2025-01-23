@@ -36,10 +36,6 @@ module Panda
       )
     end
 
-    def method
-      raw_method.downcase.to_sym
-    end
-
     private
 
     def get?

@@ -40,13 +40,11 @@ describe Panda::Client do
     end
   end
 
-  describe '#token_info' do
-    it 'calls #get_token' do
-      expect(subject)
-        .to receive(:get_token)
-        .with('tt_user/token_info/get/', { app_id: Panda.config.app_id, access_token: token })
+  describe '#user_info' do
+    it 'calls #get_user' do
+      expect(subject).to receive(:get_user).with('user/info/')
 
-      subject.token_info
+      subject.user_info
     end
   end
 end

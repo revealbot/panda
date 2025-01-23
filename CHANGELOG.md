@@ -5,3 +5,7 @@
 ## 0.5.1
 
 * Use POST method for `token_info` request
+
+## 0.5.2
+
+* Use GET `user_info` to check tokens
