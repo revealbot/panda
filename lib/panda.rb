@@ -25,8 +25,14 @@ module Panda
         conn.response :json
       end
 
-      response = connection.get(request.url, request.params, request.headers)
+      response = do_request(connection, request)
       Panda::HTTPResponse.new(response.status, response.headers, response.body)
+    end
+
+    def do_request(connection, request)
+      return connection.post(request.url, request.params, request.headers) if request.method == :post
+
+      connection.get(request.url, request.params, request.headers)
     end
   end
 end
