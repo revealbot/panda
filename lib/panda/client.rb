@@ -5,7 +5,7 @@ require 'panda/error_middleware'
 require 'panda/errors'
 require 'panda/http_request'
 require 'panda/http_response'
-require 'panda/token_info'
+require 'panda/item'
 
 module Panda
   class Client
@@ -53,6 +53,11 @@ module Panda
       )
     end
 
+    def user_info
+      get_user('user/info/')
+    end
+
+    # requires token from Accounts API
     def token_info
       get_token(
         'tt_user/token_info/get/',
@@ -63,9 +68,14 @@ module Panda
 
     private
 
+    def get_user(path, params = {})
+      request = Panda::HTTPRequest.new('GET', path, params, 'Access-Token' => access_token)
+      Panda::Item.new(Panda.make_request(request))
+    end
+
     def get_token(path, params = {})
       request = Panda::HTTPRequest.new('POST', path, params)
-      Panda::TokenInfo.new(Panda.make_request(request))
+      Panda::Item.new(Panda.make_request(request))
     end
 
     def get_collection(path, params = {})

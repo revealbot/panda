@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Panda
-  class TokenInfo
+  class Item
     attr_reader :data
 
     def initialize(response)

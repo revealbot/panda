@@ -40,6 +40,14 @@ describe Panda::Client do
     end
   end
 
+  describe '#user_info' do
+    it 'calls #get_user' do
+      expect(subject).to receive(:get_user).with('user/info/')
+
+      subject.user_info
+    end
+  end
+
   describe '#token_info' do
     it 'calls #get_token' do
       expect(subject)
