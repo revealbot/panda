@@ -9,3 +9,7 @@
 ## 0.5.2
 
 * Use GET `user_info` to check tokens
+
+## 0.6.0
+
+* Switch to Faraday 2 [changelog](https://github.com/lostisland/faraday/blob/main/CHANGELOG.md) to support other updates

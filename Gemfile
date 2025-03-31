@@ -6,7 +6,7 @@ gemspec
 
 group :development do
   gem 'rake'
-  gem 'rubocop', '1.20'
+  gem 'rubocop', '1.65'
 end
 
 group :test do
