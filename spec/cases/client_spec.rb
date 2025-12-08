@@ -20,6 +20,7 @@ describe Panda::Client do
     it 'calls #get_collection' do
       expect(subject).to receive(:get_collection).with(
         'oauth2/advertiser/get/',
+        'list',
         app_id: app_id,
         secret: app_secret,
         access_token: token
@@ -34,7 +35,11 @@ describe Panda::Client do
     let(:fields) { %w[id name status timezone currency].sample(3) }
 
     it 'calls #get_collection' do
-      expect(subject).to receive(:get_collection).with('advertiser/info/', { advertiser_ids: ids, fields: fields })
+      expect(subject).to receive(:get_collection).with(
+        'advertiser/info/',
+        'list',
+        { advertiser_ids: ids, fields: fields }
+      )
 
       subject.advertiser_info(ids, fields: fields)
     end
@@ -55,6 +60,18 @@ describe Panda::Client do
         .with('tt_user/token_info/get/', { app_id: Panda.config.app_id, access_token: token })
 
       subject.token_info
+    end
+  end
+
+  describe '#app_list' do
+    let(:advertiser_id) { SecureRandom.hex }
+
+    it 'calls #get_collection' do
+      expect(subject)
+        .to receive(:get_collection)
+        .with('app/list/', 'apps', { advertiser_id: advertiser_id })
+
+      subject.app_list(advertiser_id)
     end
   end
 end

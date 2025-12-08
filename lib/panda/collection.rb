@@ -11,7 +11,7 @@ module Panda
                 :total_number,
                 :total_page
 
-    def initialize(response, client)
+    def initialize(response, client, collection_key)
       @response = response
       @client = client
 
@@ -21,7 +21,7 @@ module Panda
       if data.is_a?(Hash)
         fill_page_info(data)
 
-        super(data['list'])
+        super(data[collection_key])
       else
         super(data)
       end

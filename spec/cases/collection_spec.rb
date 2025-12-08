@@ -33,7 +33,7 @@ describe Panda::Collection do
     end
 
     it 'gets result list' do
-      collection = Panda::Collection.new(response, nil)
+      collection = Panda::Collection.new(response, nil, 'list')
 
       expect(collection).to contain_exactly(
         { 'id' => 'test_id_1', 'name' => 'test_name_1' },
@@ -66,7 +66,7 @@ describe Panda::Collection do
     end
 
     it 'gets result list' do
-      collection = described_class.new(response, nil)
+      collection = described_class.new(response, nil, collection_key: 'list')
 
       expect(collection).to contain_exactly(
         { 'id' => 'test_id_1', 'name' => 'test_name_1' },
