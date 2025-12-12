@@ -20,10 +20,11 @@ describe Panda::Client do
     it 'calls #get_collection' do
       expect(subject).to receive(:get_collection).with(
         'oauth2/advertiser/get/',
-        'list',
-        app_id: app_id,
-        secret: app_secret,
-        access_token: token
+        params: {
+          app_id: app_id,
+          secret: app_secret,
+          access_token: token
+        }
       )
 
       subject.advertisers
@@ -37,8 +38,7 @@ describe Panda::Client do
     it 'calls #get_collection' do
       expect(subject).to receive(:get_collection).with(
         'advertiser/info/',
-        'list',
-        { advertiser_ids: ids, fields: fields }
+        params: { advertiser_ids: ids, fields: fields }
       )
 
       subject.advertiser_info(ids, fields: fields)
@@ -69,7 +69,7 @@ describe Panda::Client do
     it 'calls #get_collection' do
       expect(subject)
         .to receive(:get_collection)
-        .with('app/list/', 'apps', { advertiser_id: advertiser_id })
+        .with('app/list/', params: { advertiser_id: advertiser_id }, collection_key: 'apps')
 
       subject.app_list(advertiser_id)
     end

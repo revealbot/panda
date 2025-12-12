@@ -19,39 +19,35 @@ module Panda
     def advertisers
       get_collection(
         'oauth2/advertiser/get/',
-        'list',
-        access_token: access_token,
-        app_id: Panda.config.app_id,
-        secret: Panda.config.app_secret
+        params: {
+          access_token: access_token,
+          app_id: Panda.config.app_id,
+          secret: Panda.config.app_secret
+        }
       )
     end
 
     def advertiser_info(ids, params = {})
-      get_collection('advertiser/info/', 'list', params.merge(advertiser_ids: ids))
+      get_collection('advertiser/info/', params: params.merge(advertiser_ids: ids))
     end
 
     # returns a list of campaigngs for an advertizer
     def campaigns(advertizer_id, params = {})
-      get_collection('campaign/get/', 'list', params.merge(advertiser_id: advertizer_id))
+      get_collection('campaign/get/', params: params.merge(advertiser_id: advertizer_id))
     end
 
     def ad_groups(advertizer_id, params = {})
-      get_collection('adgroup/get/', 'list', params.merge(advertiser_id: advertizer_id))
+      get_collection('adgroup/get/', params: params.merge(advertiser_id: advertizer_id))
     end
 
     def ads(advertizer_id, params = {})
-      get_collection('ad/get/', 'list', params.merge(advertiser_id: advertizer_id))
+      get_collection('ad/get/', params: params.merge(advertiser_id: advertizer_id))
     end
 
     def report(advertiser_id, report_type, dimensions, params = {})
       get_collection(
         'report/integrated/get/',
-        'list',
-        params.merge(
-          advertiser_id: advertiser_id,
-          report_type: report_type,
-          dimensions: dimensions
-        )
+        params: params.merge(advertiser_id: advertiser_id, report_type: report_type, dimensions: dimensions)
       )
     end
 
@@ -70,7 +66,7 @@ module Panda
 
     # list of apps for an advertiser
     def app_list(advertiser_id)
-      get_collection('app/list/', 'apps', advertiser_id: advertiser_id)
+      get_collection('app/list/', params: { advertiser_id: advertiser_id }, collection_key: 'apps')
     end
 
     private
@@ -85,7 +81,7 @@ module Panda
       Panda::Item.new(Panda.make_request(request))
     end
 
-    def get_collection(path, collection_key, params = {})
+    def get_collection(path, params: {}, collection_key: 'list')
       request = Panda::HTTPRequest.new('GET', path, params, 'Access-Token' => access_token)
       Panda::Collection.new(Panda.make_request(request), self, collection_key)
     end
