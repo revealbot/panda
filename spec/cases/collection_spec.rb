@@ -33,7 +33,7 @@ describe Panda::Collection do
     end
 
     it 'gets result list' do
-      collection = Panda::Collection.new(response, nil)
+      collection = Panda::Collection.new(response, nil, 'list')
 
       expect(collection).to contain_exactly(
         { 'id' => 'test_id_1', 'name' => 'test_name_1' },
@@ -66,11 +66,46 @@ describe Panda::Collection do
     end
 
     it 'gets result list' do
-      collection = described_class.new(response, nil)
+      collection = described_class.new(response, nil, 'list')
 
       expect(collection).to contain_exactly(
         { 'id' => 'test_id_1', 'name' => 'test_name_1' },
         { 'id' => 'test_id_2', 'name' => 'test_name_2' }
+      )
+      expect(collection.page).to be_nil
+      expect(collection.page_size).to be_nil
+      expect(collection.total_number).to be_nil
+      expect(collection.total_page).to be_nil
+    end
+  end
+
+  context 'response with apps list field in data field' do
+    let(:list_response_body) do
+      {
+        'message' => 'OK',
+        'code' => 0,
+        'data' => {
+          'apps' => [
+            {
+              'id' => 'app_id_1',
+              'name' => 'app_name_1'
+            },
+            {
+              'id' => 'app_id_2',
+              'name' => 'app_name_2'
+            }
+          ]
+        },
+        'response_id': '2020031009181201018904922342087A16'
+      }
+    end
+
+    it 'gets result list' do
+      collection = Panda::Collection.new(response, nil, 'apps')
+
+      expect(collection).to contain_exactly(
+        { 'id' => 'app_id_1', 'name' => 'app_name_1' },
+        { 'id' => 'app_id_2', 'name' => 'app_name_2' }
       )
       expect(collection.page).to be_nil
       expect(collection.page_size).to be_nil

@@ -1,4 +1,4 @@
-### Panda TikTok API Client
+# Panda TikTok API Client
 
 ## Overview
 
@@ -42,67 +42,74 @@ end
 
 ## Usage
 
-# Creating a Client
+### Creating a Client
 
 To interact with the TikTok Ads API, initialize the client with an access token:
 ```ruby
 client = Panda::Client.new('your_access_token')
 ```
 
-# Retrieving Advertisers
+### Retrieving Advertisers
 
 Fetch the list of advertisers associated with the access token:
 ```ruby
 advertisers = client.advertisers
 ```
 
-# Fetching Advertiser Information
+### Fetching Advertiser Information
 
 Retrieve details about specific advertisers:
 ```ruby
 advertiser_info = client.advertiser_info(['advertiser_id_1', 'advertiser_id_2'])
 ```
 
-# Retrieving Campaigns
+### Retrieving Campaigns
 
 Get all campaigns for an advertiser:
 ```ruby
 campaigns = client.campaigns('advertiser_id')
 ```
 
-# Retrieving Ad Groups
+### Retrieving Ad Groups
 
 Fetch all ad groups for an advertiser:
 ```ruby
 ad_groups = client.ad_groups('advertiser_id')
 ```
 
-# Retrieving Ads
+### Retrieving Ads
 
 Get all ads for an advertiser:
 ```ruby
 ads = client.ads('advertiser_id')
 ```
 
-# Fetching Reports
+### Fetching Reports
 
 Retrieve advertising performance reports with specified dimensions:
 ```ruby
 report = client.report('advertiser_id', 'BASIC', ['campaign_id', 'adgroup_id'])
 ```
 
-# Fetching User Information
+### Fetching User Information
 
 Retrieve the user profile associated with the access token:
 ```ruby
 user_info = client.user_info
 ```
 
-# Validating Token
+### Validating Token
 
 Validate the current access token:
 ```ruby
 token_info = client.token_info
+```
+
+### Listing Apps
+
+Retrieve the list of apps for an advertiser:
+```ruby
+apps = client.app_list('advertiser_id')
 ```
 
 ## Error Handling

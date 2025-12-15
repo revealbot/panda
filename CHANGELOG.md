@@ -13,3 +13,7 @@
 ## 0.6.0
 
 * Switch to Faraday 2 [changelog](https://github.com/lostisland/faraday/blob/main/CHANGELOG.md) to support other updates
+
+## 0.7.0
+
+* Add 'app_list' [method](https://business-api.tiktok.com/portal/docs?id=1740859313270786) to list apps of an advertiser
