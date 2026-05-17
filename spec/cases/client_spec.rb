@@ -74,4 +74,46 @@ describe Panda::Client do
       subject.app_list(advertiser_id)
     end
   end
+
+  describe '#smart_plus_ad_groups' do
+    let(:advertiser_id) { SecureRandom.hex }
+    let(:filtering) { { adgroup_ids: [SecureRandom.hex] } }
+
+    it 'calls #get_collection with merged params' do
+      expect(subject)
+        .to receive(:get_collection)
+        .with('smart_plus/adgroup/get/', params: { advertiser_id: advertiser_id, filtering: filtering })
+
+      subject.smart_plus_ad_groups(advertiser_id, filtering: filtering)
+    end
+
+    it 'calls #get_collection with only advertiser_id when no extra params' do
+      expect(subject)
+        .to receive(:get_collection)
+        .with('smart_plus/adgroup/get/', params: { advertiser_id: advertiser_id })
+
+      subject.smart_plus_ad_groups(advertiser_id)
+    end
+  end
+
+  describe '#smart_plus_ads' do
+    let(:advertiser_id) { SecureRandom.hex }
+    let(:filtering) { { ad_ids: [SecureRandom.hex] } }
+
+    it 'calls #get_collection with merged params' do
+      expect(subject)
+        .to receive(:get_collection)
+        .with('smart_plus/ad/get/', params: { advertiser_id: advertiser_id, filtering: filtering })
+
+      subject.smart_plus_ads(advertiser_id, filtering: filtering)
+    end
+
+    it 'calls #get_collection with only advertiser_id when no extra params' do
+      expect(subject)
+        .to receive(:get_collection)
+        .with('smart_plus/ad/get/', params: { advertiser_id: advertiser_id })
+
+      subject.smart_plus_ads(advertiser_id)
+    end
+  end
 end
