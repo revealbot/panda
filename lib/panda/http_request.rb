@@ -20,12 +20,12 @@ module Panda
       uri.to_s
     end
 
-    # TikTok accepts arrays in GET request only as json strings
+    # TikTok accepts arrays and nested objects in GET request only as json strings
     def params
       return raw_params unless get? && raw_params.is_a?(Hash)
 
       raw_params.inject({}) do |hash, (key, value)|
-        hash.merge(key => value.is_a?(Array) ? value.to_json : value)
+        hash.merge(key => value.is_a?(Array) || value.is_a?(Hash) ? value.to_json : value)
       end
     end
 

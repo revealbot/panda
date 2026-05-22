@@ -31,6 +31,24 @@ describe Panda::HTTPRequest do
     )
   end
 
+  it 'converts GET hash params to JSON string' do
+    request = described_class.new(
+      'GET',
+      'ad/get/',
+      {
+        advertiser_id: '123',
+        filtering: { ad_status: 'STATUS_ALL', campaign_ids: [1, 2] }
+      }
+    )
+
+    expect(request.params).to eq(
+      {
+        advertiser_id: '123',
+        filtering: '{"ad_status":"STATUS_ALL","campaign_ids":[1,2]}'
+      }
+    )
+  end
+
   it 'adds additional headers' do
     request = described_class.new('GET', 'oauth2/advertiser/get', {}, { 'Access-Token' => 'sometoken' })
 

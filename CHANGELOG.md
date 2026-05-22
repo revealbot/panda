@@ -22,3 +22,7 @@
 
 * Add `smart_plus_ad_groups` [method](https://business-api.tiktok.com/portal/docs?id=1843314879617026) to list Upgraded Smart+ ad groups
 * Add `smart_plus_ads` [method](https://business-api.tiktok.com/portal/docs/get-upgraded-smart-ads/v1.3) to list Upgraded Smart+ ads
+
+## 0.8.1
+
+* JSON-encode Hash params (e.g. `filtering`) in GET requests so callers no longer have to call `.to_json` themselves
