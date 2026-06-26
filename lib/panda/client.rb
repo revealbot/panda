@@ -44,6 +44,16 @@ module Panda
       get_collection('ad/get/', params: params.merge(advertiser_id: advertizer_id))
     end
 
+    # returns a list of Upgraded Smart+ ad groups for an advertiser
+    def smart_plus_ad_groups(advertiser_id, params = {})
+      get_collection('smart_plus/adgroup/get/', params: params.merge(advertiser_id: advertiser_id))
+    end
+
+    # returns a list of Upgraded Smart+ ads for an advertiser
+    def smart_plus_ads(advertiser_id, params = {})
+      get_collection('smart_plus/ad/get/', params: params.merge(advertiser_id: advertiser_id))
+    end
+
     def report(advertiser_id, report_type, dimensions, params = {})
       get_collection(
         'report/integrated/get/',

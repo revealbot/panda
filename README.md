@@ -84,6 +84,36 @@ Get all ads for an advertiser:
 ads = client.ads('advertiser_id')
 ```
 
+### Retrieving Upgraded Smart+ Ad Groups
+
+Fetch all Upgraded Smart+ ad groups for an advertiser. Accepts the same `filtering`, `fields`, `page`, and `page_size` parameters as `ad_groups`:
+```ruby
+smart_plus_ad_groups = client.smart_plus_ad_groups('advertiser_id')
+
+# with filtering
+smart_plus_ad_groups = client.smart_plus_ad_groups(
+  'advertiser_id',
+  filtering: { adgroup_ids: %w[123 456] },
+  page: 1,
+  page_size: 50
+)
+```
+
+### Retrieving Upgraded Smart+ Ads
+
+Fetch all Upgraded Smart+ ads for an advertiser. Accepts the same `filtering`, `fields`, `page`, and `page_size` parameters as `ads`:
+```ruby
+smart_plus_ads = client.smart_plus_ads('advertiser_id')
+
+# with filtering
+smart_plus_ads = client.smart_plus_ads(
+  'advertiser_id',
+  filtering: { ad_ids: %w[123 456] },
+  page: 1,
+  page_size: 50
+)
+```
+
 ### Fetching Reports
 
 Retrieve advertising performance reports with specified dimensions:
