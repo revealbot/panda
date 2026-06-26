@@ -24,8 +24,8 @@ module Panda
     def params
       return raw_params unless get? && raw_params.is_a?(Hash)
 
-      raw_params.inject({}) do |hash, (key, value)|
-        hash.merge(key => value.is_a?(Array) || value.is_a?(Hash) ? value.to_json : value)
+      raw_params.transform_values do |value|
+        value.is_a?(Array) || value.is_a?(Hash) ? value.to_json : value
       end
     end
 
