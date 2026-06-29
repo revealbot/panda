@@ -92,8 +92,27 @@ module Panda
     end
 
     def get_collection(path, params: {}, collection_key: 'list')
+      collection = request_collection(path, params, collection_key)
+
+      # honor an explicitly requested page and return it as-is
+      return collection if params.key?(:page) || params.key?('page')
+
+      append_remaining_pages(collection, path, params, collection_key)
+    end
+
+    def request_collection(path, params, collection_key)
       request = Panda::HTTPRequest.new('GET', path, params, 'Access-Token' => access_token)
       Panda::Collection.new(Panda.make_request(request), self, collection_key)
+    end
+
+    # recursively fetches pages 2..total_page and appends their items to the first collection
+    def append_remaining_pages(collection, path, params, collection_key, page = 2)
+      return collection if collection.total_page.nil? || page > collection.total_page
+
+      next_page = request_collection(path, params.merge(page: page), collection_key)
+      collection.concat(next_page)
+
+      append_remaining_pages(collection, path, params, collection_key, page + 1)
     end
   end
 end

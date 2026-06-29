@@ -116,4 +116,77 @@ describe Panda::Client do
       subject.smart_plus_ads(advertiser_id)
     end
   end
+
+  describe '#get_collection (pagination)' do
+    let(:path) { 'campaign/get/' }
+
+    def page_body(page, items)
+      {
+        'code' => 0,
+        'message' => 'OK',
+        'data' => {
+          'list' => items,
+          'page_info' => { 'page' => page, 'page_size' => 2, 'total_number' => 5, 'total_page' => 3 }
+        }
+      }
+    end
+
+    context 'when no page is specified' do
+      before do
+        responses = {
+          1 => Panda::HTTPResponse.new(200, {}, page_body(1, [{ 'id' => '1' }, { 'id' => '2' }])),
+          2 => Panda::HTTPResponse.new(200, {}, page_body(2, [{ 'id' => '3' }, { 'id' => '4' }])),
+          3 => Panda::HTTPResponse.new(200, {}, page_body(3, [{ 'id' => '5' }]))
+        }
+
+        allow(Panda).to receive(:make_request) { |request| responses.fetch(request.raw_params.fetch(:page, 1)) }
+      end
+
+      it 'collects items from every page' do
+        collection = subject.send(:get_collection, path)
+
+        expect(collection.map { |item| item['id'] }).to eq(%w[1 2 3 4 5])
+      end
+
+      it 'requests each page exactly once' do
+        subject.send(:get_collection, path)
+
+        expect(Panda).to have_received(:make_request).exactly(3).times
+      end
+    end
+
+    context 'when a specific page is specified' do
+      before do
+        allow(Panda)
+          .to receive(:make_request)
+          .and_return(Panda::HTTPResponse.new(200, {}, page_body(2, [{ 'id' => '3' }, { 'id' => '4' }])))
+      end
+
+      it 'returns only the requested page' do
+        collection = subject.send(:get_collection, path, params: { page: 2 })
+
+        expect(collection.map { |item| item['id'] }).to eq(%w[3 4])
+      end
+
+      it 'makes a single request' do
+        subject.send(:get_collection, path, params: { page: 2 })
+
+        expect(Panda).to have_received(:make_request).once
+      end
+    end
+
+    context 'when the response has no page info' do
+      before do
+        body = { 'code' => 0, 'message' => 'OK', 'data' => [{ 'id' => '1' }] }
+        allow(Panda).to receive(:make_request).and_return(Panda::HTTPResponse.new(200, {}, body))
+      end
+
+      it 'returns the single collection without extra requests' do
+        collection = subject.send(:get_collection, path)
+
+        expect(collection.map { |item| item['id'] }).to eq(%w[1])
+        expect(Panda).to have_received(:make_request).once
+      end
+    end
+  end
 end
