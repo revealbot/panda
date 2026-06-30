@@ -70,6 +70,20 @@ Get all campaigns for an advertiser:
 campaigns = client.campaigns('advertiser_id')
 ```
 
+### Pagination
+
+Collection methods (`campaigns`, `ad_groups`, `ads`, `smart_plus_ad_groups`, `smart_plus_ads`, etc.) automatically collect **every page** and return all items in a single collection:
+```ruby
+# fetches page 1, 2, ... up to total_page and returns all items
+all_campaigns = client.campaigns('advertiser_id')
+```
+
+To fetch a single page instead, pass an explicit `page` (use a larger `page_size` to reduce the number of requests when collecting everything):
+```ruby
+# returns only the requested page
+first_page = client.campaigns('advertiser_id', page: 1, page_size: 100)
+```
+
 ### Retrieving Ad Groups
 
 Fetch all ad groups for an advertiser:

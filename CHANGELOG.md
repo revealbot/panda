@@ -26,3 +26,7 @@
 ## 0.8.1
 
 * JSON-encode Hash params (e.g. `filtering`) in GET requests so callers no longer have to call `.to_json` themselves
+
+## 0.9.0
+
+* Auto-paginate collection requests: methods like `campaigns`, `ad_groups`, `ads`, etc. now collect every page and return all items, unless a specific `page` is requested
